@@ -1,5 +1,9 @@
 # Ludum Dare 44: Your life is currency
 
+## Credits
+
+- https://www.gameart2d.com/free-platformer-game-tileset.html
+
 ## Dev log
 
 ## Startup

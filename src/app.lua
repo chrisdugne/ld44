@@ -14,17 +14,21 @@ App:start(
     API_GATEWAY_KEY = '',
     -----------------------------------------
     -- 'production', 'development', 'editor'
-    ENV = 'production',
+    ENV = 'development',
     -----------------------------------------
     showHeadphonesScreen = false,
     -----------------------------------------
     background = {
-      color = '#3a3f46'
+      color = '#003746'
     },
     screens = {
       HOME = 'home.scene'
     },
     colors = {
+      '#DA1D38',
+      '#33a14a',
+      '#ffe35b',
+      '#911eb4',
       text = '#ededed'
     },
     globals = {},
