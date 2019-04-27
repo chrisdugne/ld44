@@ -35,7 +35,20 @@ end
 --------------------------------------------------------------------------------
 
 function Game:initialState()
-  return _.extend({})
+  local spaces = {}
+
+  for l = 1, NB_LINES do
+    spaces[l] = {}
+    for r = 1, NB_ROWS do
+      spaces[l][r] = nil
+    end
+  end
+
+  return _.extend(
+    {
+      blocks = spaces
+    }
+  )
 end
 
 function Game:resetState()
@@ -64,26 +77,44 @@ end
 
 --------------------------------------------------------------------------------
 
+function Game:nextSpawn()
+  timer.performWithDelay(
+    500,
+    function()
+      self:spawnBlock()
+      self:nextSpawn()
+    end
+  )
+end
+
+--------------------------------------------------------------------------------
+
 function Game:spawnBlock()
+  local row = math.random(1, NB_ROWS)
+
+  local line
   for l = 1, NB_LINES do
-    for r = 1, NB_ROWS do
-      Block:create(
-        {
-          parent = self.box,
-          x = ROWS[r],
-          y = LINES[l],
-          color = math.random(1, 4)
-        }
-      )
+    if (not self.state.blocks[l][row]) then
+      line = l
     end
   end
+
+  self.state.blocks[line][row] =
+    Block:create(
+    {
+      parent = self.box,
+      x = ROWS[row],
+      y = LINES[line],
+      color = math.random(1, 4)
+    }
+  )
 end
 
 --------------------------------------------------------------------------------
 
 function Game:onRun()
   self:createBox()
-  self:spawnBlock()
+  self:nextSpawn()
 end
 
 --------------------------------------------------------------------------------

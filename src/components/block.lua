@@ -36,6 +36,14 @@ function Block:create(options)
   self.image.y = options.y
   self.image:setFillColor(colorize(App.colors[options.color]))
 
+  transition.from(
+    self.image,
+    {
+      y = -H / 2,
+      transition = easing.outQuad
+    }
+  )
+
   return self
 end
 
