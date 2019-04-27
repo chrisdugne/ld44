@@ -1,0 +1,13 @@
+{
+  "gameSettings": {
+    "spaceship": {
+      "nbQuestions": 3
+    }
+  },
+  "silent": true,
+  "invincible": true,
+  "selectedGame": "spaceship",
+  // "selectedGame": "survival",
+  // "view-testing": "home.scene"
+  "view-testing": "playground"
+}
