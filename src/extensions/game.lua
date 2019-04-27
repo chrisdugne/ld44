@@ -81,8 +81,12 @@ function Game:nextSpawn()
   timer.performWithDelay(
     500,
     function()
-      self:spawnBlock()
-      self:nextSpawn()
+      local success = self:spawnBlock()
+      if (success) then
+        self:nextSpawn()
+      else
+        self:gameOver()
+      end
     end
   )
 end
@@ -99,6 +103,10 @@ function Game:spawnBlock()
     end
   end
 
+  if (not line) then
+    return false
+  end
+
   self.state.blocks[line][row] =
     Block:create(
     {
@@ -108,6 +116,8 @@ function Game:spawnBlock()
       color = math.random(1, 4)
     }
   )
+
+  return true
 end
 
 --------------------------------------------------------------------------------
@@ -115,6 +125,20 @@ end
 function Game:onRun()
   self:createBox()
   self:nextSpawn()
+end
+
+--------------------------------------------------------------------------------
+
+function Game:gameOver()
+  Text:create(
+    {
+      parent = App.hud,
+      value = 'Game Over',
+      x = W / 2,
+      y = H / 3,
+      fontSize = 100
+    }
+  )
 end
 
 --------------------------------------------------------------------------------
