@@ -2,7 +2,6 @@
 
 local _ = require 'cherry.libs.underscore'
 local Block = require 'src.components.block'
-local Button = require 'cherry.components.button'
 local Text = require 'cherry.components.text'
 local colorize = require 'cherry.libs.colorize'
 
@@ -107,17 +106,35 @@ function Game:spawnBlock()
     return false
   end
 
+  local color = math.random(1, NB_COLORS)
+
   self.state.blocks[line][row] =
     Block:create(
     {
       parent = self.box,
       x = ROWS[row],
       y = LINES[line],
-      color = math.random(1, 4)
+      color = color,
+      removeColor = function()
+        self:removeColor(color)
+      end
     }
   )
 
   return true
+end
+
+--------------------------------------------------------------------------------
+
+function Game:removeColor(color)
+  for l = 1, NB_LINES do
+    for r = 1, NB_ROWS do
+      local block = self.state.blocks[l][r]
+      if (block and (block.color == color)) then
+        block:destroy()
+      end
+    end
+  end
 end
 
 --------------------------------------------------------------------------------

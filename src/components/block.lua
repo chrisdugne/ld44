@@ -2,6 +2,7 @@
 
 local _ = require 'cherry.libs.underscore'
 local colorize = require 'cherry.libs.colorize'
+local gesture = require 'cherry.libs.gesture'
 
 --------------------------------------------------------------------------------
 
@@ -13,7 +14,7 @@ local Block = {
 --------------------------------------------------------------------------------
 
 function Block:create(options)
-  options =
+  local block =
     _.defaults(
     options or {},
     {
@@ -24,27 +25,43 @@ function Block:create(options)
     }
   )
 
-  self.image =
+  block.image =
     display.newImageRect(
-    options.parent,
+    block.parent,
     'assets/images/game/block.png',
-    self.WIDTH,
-    self.HEIGHT
+    Block.WIDTH,
+    Block.HEIGHT
   )
 
-  self.image.x = options.x
-  self.image.y = options.y
-  self.image:setFillColor(colorize(App.colors[options.color]))
+  block.image.x = options.x
+  block.image.y = options.y
+  block.image:setFillColor(colorize(App.colors[block.color]))
 
   transition.from(
-    self.image,
+    block.image,
     {
+      alpha = 0,
       y = -H / 2,
-      transition = easing.outQuad
+      transition = easing.outQuad,
+      time = 900
     }
   )
 
-  return self
+  gesture.onTap(
+    block.image,
+    function()
+      options.removeColor()
+    end
+  )
+
+  setmetatable(block, {__index = Block})
+  return block
+end
+
+--------------------------------------------------------------------------------
+
+function Block:destroy()
+  display.remove(self.image)
 end
 
 --------------------------------------------------------------------------------
