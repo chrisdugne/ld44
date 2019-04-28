@@ -172,11 +172,16 @@ settings = {
   },
   excludeFiles = {
     all = {
-      'docs/**',
+      'cherry/assets/images/**',
       'assets/brand/**',
       'assets/drafts/**'
     },
     iphone = {'Icon-*dpi.png'},
-    android = {'Icon.png', 'Icon-Small-*.png', 'Icon*@2x.png'}
+    android = {
+      'Images.xcassets',
+      'Icon*.png',
+      'Icon-Small-*.png',
+      'Icon*@2x.png'
+    }
   }
 }
