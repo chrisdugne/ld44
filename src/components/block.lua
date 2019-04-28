@@ -25,6 +25,9 @@ function Block:create(options)
     }
   )
 
+  block.l = options.l
+  block.r = options.r
+
   block.image =
     display.newImageRect(
     block.parent,
@@ -60,8 +63,39 @@ end
 
 --------------------------------------------------------------------------------
 
+function Block:fallTo(newY)
+  if (self.currentTransition) then
+    transition.cancel(self.currentTransition)
+  end
+
+  self.currentTransition =
+    transition.to(
+    self.image,
+    {
+      y = newY,
+      transition = easing.outQuad,
+      time = 900
+    }
+  )
+end
+
+--------------------------------------------------------------------------------
+
 function Block:destroy()
   display.remove(self.image)
+end
+
+--------------------------------------------------------------------------------
+
+function Block:toString()
+  _G.log(
+    '[' ..
+      self.l ..
+        '][' ..
+          self.r ..
+            '] | COLOR :  ' ..
+              self.color .. ' | linesToGoDown: ' .. (self.linesToGoDown or 0)
+  )
 end
 
 --------------------------------------------------------------------------------
