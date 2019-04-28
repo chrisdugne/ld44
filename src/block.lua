@@ -6,10 +6,10 @@ local gesture = require 'cherry.libs.gesture'
 
 --------------------------------------------------------------------------------
 
-local Block = {
-  HEIGHT = H / 12,
-  WIDTH = H / 12
-}
+local BLOCK_WIDTH = H / 12
+local BLOCK_HEIGHT = H / 12
+
+local Block = {}
 
 --------------------------------------------------------------------------------
 
@@ -32,8 +32,8 @@ function Block:create(options)
     display.newImageRect(
     block.parent,
     'assets/images/game/block.png',
-    Block.WIDTH,
-    Block.HEIGHT
+    BLOCK_WIDTH,
+    BLOCK_HEIGHT
   )
 
   block.image.x = options.x

@@ -22,7 +22,6 @@ function Points:create(options)
   )
 
   setmetatable(component, {__index = Points})
-
   component:createText()
   return component
 end

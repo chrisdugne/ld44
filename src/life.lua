@@ -23,7 +23,6 @@ function Life:create(options)
     }
   )
 
-  setmetatable(life, {__index = Life})
   life.lifeBar =
     ProgressBar:new(
     _.extend(
@@ -35,6 +34,7 @@ function Life:create(options)
     )
   )
 
+  setmetatable(life, {__index = Life})
   life:createText()
   life:createCoin()
   return life

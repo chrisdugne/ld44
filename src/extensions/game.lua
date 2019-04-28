@@ -7,9 +7,9 @@ local gesture = require 'cherry.libs.gesture'
 
 --------------------------------------------------------------------------------
 
-local Block = require 'src.block'
 local Life = require 'src.life'
 local Points = require 'src.points'
+local Block = require 'src.block'
 
 --------------------------------------------------------------------------------
 
@@ -22,21 +22,11 @@ local NB_ROWS = 5
 local NB_COLORS = 4
 local SPEED = 200
 
-local boxWidth = NB_ROWS * Block.WIDTH
-local boxHeigth = NB_LINES * Block.HEIGHT
+local BLOCK_WIDTH = H / 12
+local BLOCK_HEIGHT = H / 12
 
---------------------------------------------------------------------------------
-
-local LINES = {}
-local ROWS = {}
-
-for l = 1, NB_LINES do
-  LINES[l] = boxHeigth / 2 - (l - 1 / 2) * Block.HEIGHT
-end
-
-for r = 1, NB_ROWS do
-  ROWS[r] = (r - 1 / 2) * Block.WIDTH - boxWidth / 2
-end
+local boxWidth = NB_ROWS * BLOCK_WIDTH
+local boxHeigth = NB_LINES * BLOCK_HEIGHT
 
 --------------------------------------------------------------------------------
 
@@ -127,8 +117,8 @@ function Game:spawnBlock()
       parent = self.box,
       l = line,
       r = row,
-      x = ROWS[row],
-      y = LINES[line],
+      x = self.ROWS[row],
+      y = self.LINES[line],
       color = color,
       removeColor = function()
         self:removeColor(color)
@@ -164,7 +154,7 @@ function Game:removeColor(color)
             local newLine = l - nbLinesToGoDown
             self.state.blocks[l][r] = nil
             self.state.blocks[newLine][r] = block
-            block:fallTo(LINES[newLine])
+            block:fallTo(self.LINES[newLine])
           end
         end
       end
@@ -204,6 +194,17 @@ end
 --------------------------------------------------------------------------------
 
 function Game:onRun()
+  self.LINES = {}
+  self.ROWS = {}
+
+  for l = 1, NB_LINES do
+    self.LINES[l] = boxHeigth / 2 - (l - 1 / 2) * BLOCK_HEIGHT
+  end
+
+  for r = 1, NB_ROWS do
+    self.ROWS[r] = (r - 1 / 2) * BLOCK_WIDTH - boxWidth / 2
+  end
+
   math.randomseed(os.time())
   self:createBox()
   self:createLife()
@@ -268,7 +269,7 @@ function Game:gameOver()
         {
           alpha = 0,
           onComplete = function()
-            self:stop()
+            self:stop(true)
             self:start()
             transition.to(
               App.hud,
