@@ -4,6 +4,7 @@ local _ = require 'cherry.libs.underscore'
 local Block = require 'src.components.block'
 local Text = require 'cherry.components.text'
 local colorize = require 'cherry.libs.colorize'
+local gesture = require 'cherry.libs.gesture'
 
 --------------------------------------------------------------------------------
 
@@ -230,6 +231,54 @@ function Game:gameOver()
       alpha = 0,
       delay = 1000
     }
+  )
+
+  local restartText =
+    Text:create(
+    {
+      parent = App.hud,
+      value = 'Restart',
+      x = W / 2,
+      y = H / 3 + 200,
+      fontSize = 70
+    }
+  )
+
+  transition.from(
+    restartText.display,
+    {
+      alpha = 0,
+      delay = 2000
+    }
+  )
+
+  transition.to(
+    self.box,
+    {
+      alpha = 0.2
+    }
+  )
+
+  gesture.onTap(
+    restartText.display,
+    function()
+      transition.to(
+        App.hud,
+        {
+          alpha = 0,
+          onComplete = function()
+            self:stop()
+            self:start()
+            transition.to(
+              App.hud,
+              {
+                alpha = 1
+              }
+            )
+          end
+        }
+      )
+    end
   )
 end
 

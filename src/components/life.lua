@@ -97,12 +97,13 @@ function Life:displayConsume()
       y = 0,
       anchorX = 1,
       font = _G.FONTS.default,
-      fontSize = 70
+      fontSize = 50
     }
   )
 
   local coin = display.newImage(info, 'assets/images/game/coin.png', 10, 0)
   coin.anchorX = 0
+  coin:scale(COIN_SCALE, COIN_SCALE)
 
   transition.from(
     info,
@@ -119,7 +120,7 @@ function Life:displayConsume()
     {
       alpha = 0,
       time = 400,
-      delay = 800,
+      delay = 500,
       xScale = 0.1,
       yScale = 0.1,
       transition = easing.inBack,

@@ -37,8 +37,8 @@ App:start(
       text = '#ededed'
     },
     globals = {
-      START_LIFE = 1000,
-      PRICE = 500
+      START_LIFE = 10,
+      PRICE = 1
     },
     fonts = {
       default = 'cherry/assets/PatrickHand-Regular.ttf'
