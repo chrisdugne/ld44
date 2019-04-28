@@ -7,6 +7,13 @@
   >
 </p>
 
+## Links
+
+- entry + story on ldjam: https://ldjam.com/events/ludum-dare/44/uralys-ld44
+- dev log: https://twitter.com/chrisdugne/status/1122041386088505344
+- browser playable demo: http://www.uralys.com/ld44/
+- osx `.dmg`: https://github.com/chrisdugne/ld44/raw/master/__builds/Uralys%20LD44.dmg
+
 ## Credits
 
 - developed with Corona SDK
@@ -15,7 +22,7 @@
 
 ## Dev log
 
-https://twitter.com/chrisdugne/status/1122041386088505344
+
 
 ## Startup
 
