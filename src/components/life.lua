@@ -58,6 +58,7 @@ function Life:createText()
     }
   )
 end
+
 --------------------------------------------------------------------------------
 
 function Life:createCoin()

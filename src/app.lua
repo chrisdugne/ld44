@@ -24,7 +24,7 @@ App:start(
     showHeadphonesScreen = false,
     -----------------------------------------
     background = {
-      color = '#003746'
+      color = '#000000'
     },
     screens = {
       HOME = 'home.scene'

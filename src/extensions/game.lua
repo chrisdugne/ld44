@@ -8,6 +8,7 @@ local colorize = require 'cherry.libs.colorize'
 --------------------------------------------------------------------------------
 
 local Life = require 'src.components.life'
+local Points = require 'src.components.points'
 
 --------------------------------------------------------------------------------
 
@@ -51,7 +52,8 @@ function Game:initialState()
   return {
     running = true,
     blocks = spaces,
-    life = _G.START_LIFE
+    life = _G.START_LIFE,
+    points = 0
   }
 end
 
@@ -71,11 +73,11 @@ function Game:createBox()
   App.hud:insert(self.box)
 
   self.box.x = W / 2
-  self.box.y = H / 2 - 100
+  self.box.y = H / 2 - 50
 
   self.box.bg = display.newRect(self.box, 0, 0, boxWidth, boxHeigth)
   self.box.bg:setFillColor(colorize('#000000'))
-  self.box.bg:setStrokeColor(colorize('#ffffff'))
+  self.box.bg:setStrokeColor(colorize('#777777'))
   self.box.bg.strokeWidth = 10
 end
 
@@ -144,6 +146,8 @@ function Game:removeColor(color)
     return
   end
 
+  local nbBlocksRemoved = 0
+
   for r = 1, NB_ROWS do
     local nbLinesToGoDown = 0
     for l = 1, NB_LINES do
@@ -151,6 +155,7 @@ function Game:removeColor(color)
       if (block) then
         if (block.color == color) then
           nbLinesToGoDown = nbLinesToGoDown + 1
+          nbBlocksRemoved = nbBlocksRemoved + 1
           block:destroy()
           self.state.blocks[l][r] = nil
         else
@@ -165,8 +170,14 @@ function Game:removeColor(color)
     end
   end
 
+  local points = nbBlocksRemoved * nbBlocksRemoved
+
   self.state.life = self.state.life - _G.PRICE
+  self.state.points = self.state.points + points
+
   self.life:refresh()
+  self.points:refresh()
+  self.points:displayWonPoints(points)
 
   if (self.state.life <= 0) then
     self:gameOver()
@@ -193,6 +204,7 @@ end
 function Game:onRun()
   self:createBox()
   self:createLife()
+  self.points = Points:create()
   self:nextSpawn()
 end
 
@@ -200,13 +212,22 @@ end
 
 function Game:gameOver()
   self.state.running = false
-  Text:create(
+  local gameOverText =
+    Text:create(
     {
       parent = App.hud,
       value = 'Game Over',
       x = W / 2,
       y = H / 3,
       fontSize = 100
+    }
+  )
+
+  transition.from(
+    gameOverText.display,
+    {
+      alpha = 0,
+      delay = 1000
     }
   )
 end
