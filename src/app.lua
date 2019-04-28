@@ -4,14 +4,9 @@ local game = require 'src.extensions.game'
 
 --------------------------------------------------------------------------------
 
-_G.log({p = os.time() * os.time()})
-math.randomseed(os.time())
-
---------------------------------------------------------------------------------
-
 App:start(
   {
-    name = 'Startup',
+    name = 'LD44',
     version = '0.0.1',
     IOS_ID = '',
     ANALYTICS_TRACKING_ID = '',
@@ -22,12 +17,10 @@ App:start(
     ENV = 'development',
     -----------------------------------------
     showHeadphonesScreen = false,
+    useNamePicker = false,
     -----------------------------------------
     background = {
       color = '#000000'
-    },
-    screens = {
-      HOME = 'home.scene'
     },
     colors = {
       '#DA1D38',

@@ -1,15 +1,15 @@
 --------------------------------------------------------------------------------
 
 local _ = require 'cherry.libs.underscore'
-local Block = require 'src.components.block'
 local Text = require 'cherry.components.text'
 local colorize = require 'cherry.libs.colorize'
 local gesture = require 'cherry.libs.gesture'
 
 --------------------------------------------------------------------------------
 
-local Life = require 'src.components.life'
-local Points = require 'src.components.points'
+local Block = require 'src.block'
+local Life = require 'src.life'
+local Points = require 'src.points'
 
 --------------------------------------------------------------------------------
 
@@ -204,6 +204,7 @@ end
 --------------------------------------------------------------------------------
 
 function Game:onRun()
+  math.randomseed(os.time())
   self:createBox()
   self:createLife()
   self.points = Points:create()
