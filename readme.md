@@ -10,8 +10,8 @@
 ## Links
 
 - entry + story on ldjam: https://ldjam.com/events/ludum-dare/44/uralys-ld44
-- dev log: https://twitter.com/chrisdugne/status/1122041386088505344
 - browser playable demo: http://www.uralys.com/ld44/
+- dev log: https://twitter.com/chrisdugne/status/1122041386088505344
 - osx `.dmg`: https://github.com/chrisdugne/ld44/raw/master/__builds/Uralys%20LD44.dmg
 
 ## Credits
@@ -19,10 +19,6 @@
 - developed with Corona SDK
 - assets created using gimp 2.10.10
 - coin edited from https://kenney.nl/assets/jumper-pack with gimp 2.10.10
-
-## Dev log
-
-
 
 ## Startup
 
