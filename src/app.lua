@@ -36,14 +36,6 @@ App:start(
     fonts = {
       default = 'cherry/assets/PatrickHand-Regular.ttf'
     },
-    scoreFields = {
-      {
-        name = 'points',
-        label = 'Points',
-        image = 'cherry/assets/images/gui/items/trophy.png',
-        scale = 0.4
-      }
-    },
     extension = {
       game = game
     }
