@@ -1,5 +1,12 @@
 # Ludum Dare 44: Your life is currency
 
+<p align="center">
+  <img 
+    src="https://user-images.githubusercontent.com/910636/56871257-97813780-6a1b-11e9-80c4-fb2a9553b5ae.gif" 
+    width="300"
+  >
+</p>
+
 ## Credits
 
 - developed with Corona SDK
