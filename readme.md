@@ -2,7 +2,7 @@
 
 ## Credits
 
-- https://www.gameart2d.com/free-platformer-game-tileset.html
+- coin edited from https://kenney.nl/assets/jumper-pack with gimp 2.10.10
 
 ## Dev log
 

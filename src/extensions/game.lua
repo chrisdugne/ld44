@@ -140,6 +140,10 @@ end
 --------------------------------------------------------------------------------
 
 function Game:removeColor(color)
+  if (not self.state.running) then
+    return
+  end
+
   for r = 1, NB_ROWS do
     local nbLinesToGoDown = 0
     for l = 1, NB_LINES do
@@ -178,7 +182,8 @@ function Game:createLife()
       parent = App.hud,
       x = W * 0.5 - boxWidth / 2,
       y = self.box.y + boxHeigth / 2 + 100,
-      width = boxWidth
+      width = boxWidth,
+      height = 50
     }
   )
 end
