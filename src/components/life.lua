@@ -81,6 +81,59 @@ end
 
 --------------------------------------------------------------------------------
 
+function Life:displayConsume()
+  local info = display.newGroup()
+  App.hud:insert(info)
+
+  info.x = W / 2
+  info.y = H / 2
+
+  local text =
+    Text:create(
+    {
+      parent = info,
+      value = '- ' .. _G.PRICE,
+      x = 0,
+      y = 0,
+      anchorX = 1,
+      font = _G.FONTS.default,
+      fontSize = 70
+    }
+  )
+
+  local coin = display.newImage(info, 'assets/images/game/coin.png', 10, 0)
+  coin.anchorX = 0
+
+  transition.from(
+    info,
+    {
+      xScale = 0.1,
+      yScale = 0.1,
+      time = 300,
+      transition = easing.outBack
+    }
+  )
+
+  transition.to(
+    info,
+    {
+      alpha = 0,
+      time = 400,
+      delay = 800,
+      xScale = 0.1,
+      yScale = 0.1,
+      transition = easing.inBack,
+      onComplete = function()
+        display.remove(coin)
+        display.remove(text)
+        display.remove(info)
+      end
+    }
+  )
+end
+
+--------------------------------------------------------------------------------
+
 function Life:refresh()
   self.lifeBar:reach(App.game.state.life / _G.START_LIFE * 100)
   self.text:setValue(App.game.state.life)

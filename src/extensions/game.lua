@@ -175,9 +175,10 @@ function Game:removeColor(color)
   self.state.life = self.state.life - _G.PRICE
   self.state.points = self.state.points + points
 
+  self.life:displayConsume()
+  self.points:displayWonPoints(points)
   self.life:refresh()
   self.points:refresh()
-  self.points:displayWonPoints(points)
 
   if (self.state.life <= 0) then
     self:gameOver()
