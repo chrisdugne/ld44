@@ -7,14 +7,18 @@ local colorize = require 'cherry.libs.colorize'
 
 --------------------------------------------------------------------------------
 
+local Life = require 'src.components.life'
+
+--------------------------------------------------------------------------------
+
 local Game = {}
 
 --------------------------------------------------------------------------------
 
 local NB_LINES = 8
-local NB_ROWS = 2
+local NB_ROWS = 5
 local NB_COLORS = 4
-local SPEED = 500
+local SPEED = 200
 
 local boxWidth = NB_ROWS * Block.WIDTH
 local boxHeigth = NB_LINES * Block.HEIGHT
@@ -44,11 +48,11 @@ function Game:initialState()
     end
   end
 
-  return _.extend(
-    {
-      blocks = spaces
-    }
-  )
+  return {
+    running = true,
+    blocks = spaces,
+    life = _G.START_LIFE
+  }
 end
 
 function Game:resetState()
@@ -85,10 +89,12 @@ function Game:nextSpawn()
         return
       end
       local success = self:spawnBlock()
-      if (success) then
-        self:nextSpawn()
-      else
+      if (not success) then
         self:gameOver()
+      else
+        if (self.state.running) then
+          self:nextSpawn()
+        end
       end
     end
   )
@@ -154,18 +160,41 @@ function Game:removeColor(color)
       end
     end
   end
+
+  self.state.life = self.state.life - _G.PRICE
+  self.life:refresh()
+
+  if (self.state.life <= 0) then
+    self:gameOver()
+  end
+end
+
+--------------------------------------------------------------------------------
+
+function Game:createLife()
+  self.life =
+    Life:create(
+    {
+      parent = App.hud,
+      x = W * 0.5 - boxWidth / 2,
+      y = self.box.y + boxHeigth / 2 + 100,
+      width = boxWidth
+    }
+  )
 end
 
 --------------------------------------------------------------------------------
 
 function Game:onRun()
   self:createBox()
+  self:createLife()
   self:nextSpawn()
 end
 
 --------------------------------------------------------------------------------
 
 function Game:gameOver()
+  self.state.running = false
   Text:create(
     {
       parent = App.hud,

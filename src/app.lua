@@ -4,6 +4,7 @@ local game = require 'src.extensions.game'
 
 --------------------------------------------------------------------------------
 
+_G.log({p = os.time() * os.time()})
 math.randomseed(os.time())
 
 --------------------------------------------------------------------------------
@@ -35,7 +36,10 @@ App:start(
       '#911eb4',
       text = '#ededed'
     },
-    globals = {},
+    globals = {
+      START_LIFE = 1000,
+      PRICE = 500
+    },
     fonts = {
       default = 'cherry/assets/PatrickHand-Regular.ttf'
     },
