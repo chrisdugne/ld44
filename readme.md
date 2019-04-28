@@ -2,9 +2,13 @@
 
 ## Credits
 
+- developed with Corona SDK
+- assets created using gimp 2.10.10
 - coin edited from https://kenney.nl/assets/jumper-pack with gimp 2.10.10
 
 ## Dev log
+
+https://twitter.com/chrisdugne/status/1122041386088505344
 
 ## Startup
 
